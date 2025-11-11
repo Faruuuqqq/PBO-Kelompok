@@ -1,8 +1,8 @@
 package parking_logic;
 
 public class Node {
-    Kendaraan data;
-    Node next;
+    public Kendaraan data;
+    public Node next;
 
   public Node() {}
 

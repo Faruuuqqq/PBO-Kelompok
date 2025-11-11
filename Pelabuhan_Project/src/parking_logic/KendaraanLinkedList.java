@@ -20,6 +20,15 @@ public class KendaraanLinkedList {
     public Node getFirst() {
         return this.first;
     }
+    
+    public Node getLast() {
+        Node current = this.first;
+        while(current.next != null) {
+            current = current.next;
+        }
+        
+        return current;
+    }
 
     // Memperbaiki method getJumlahKendaraan agar sesuai dengan atribut
     public int getJumlahKendaraan() {

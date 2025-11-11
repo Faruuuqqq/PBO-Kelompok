@@ -3,12 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package pelabuhan_project;
+import parking_logic.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alesha Naila
  */
 public class MainMenu extends javax.swing.JFrame {
+    private KendaraanLinkedList listParkir;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainMenu.class.getName());
 
@@ -17,6 +21,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        this.listParkir = new KendaraanLinkedList();
     }
 
     /**
@@ -34,7 +39,8 @@ public class MainMenu extends javax.swing.JFrame {
         btnIKMasuk = new javax.swing.JButton();
         btnRiwayatParkir = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
-        btnIKKeluar = new javax.swing.JButton();
+        btnOperasiDelete = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,11 +92,19 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        btnIKKeluar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnIKKeluar.setText("Input Kendaraan Keluar");
-        btnIKKeluar.addActionListener(new java.awt.event.ActionListener() {
+        btnOperasiDelete.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnOperasiDelete.setText("Operasi Delete");
+        btnOperasiDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIKKeluarActionPerformed(evt);
+                btnOperasiDeleteActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -99,13 +113,14 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRiwayatParkir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnIKKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIKMasuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOperasiDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66))
+                .addGap(51, 51, 51))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,12 +128,14 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(btnIKMasuk)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIKKeluar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRiwayatParkir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOperasiDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnKeluar)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,11 +143,11 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(60, 60, 60))
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,33 +156,72 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIKMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIKMasukActionPerformed
-        InputMasuk formMasuk = new InputMasuk();
+        InputMasuk formMasuk = new InputMasuk(this, this.listParkir); 
         formMasuk.setVisible(true);
-        this.dispose(); 
+        this.setVisible(false); 
     }//GEN-LAST:event_btnIKMasukActionPerformed
 
     private void btnRiwayatParkirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatParkirActionPerformed
-        RiwayatParkir formRiwayat = new RiwayatParkir();
+        RiwayatParkir formRiwayat = new RiwayatParkir(this, this.listParkir);
         formRiwayat.setVisible(true);
-        this.dispose(); 
+        this.setVisible(false);
     }//GEN-LAST:event_btnRiwayatParkirActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnKeluarActionPerformed
 
-    private void btnIKKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIKKeluarActionPerformed
-        InputKeluar formKeluar = new InputKeluar();
-        formKeluar.setVisible(true);
-        this.dispose(); 
-    }//GEN-LAST:event_btnIKKeluarActionPerformed
+    private void btnOperasiDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOperasiDeleteActionPerformed
+        OperasiDelete formDelete = new OperasiDelete(this, this.listParkir);
+        formDelete.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnOperasiDeleteActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String noKendKey = JOptionPane.showInputDialog(this, "Masukkan No. Kendaraan yang dicari:");
+        
+        if (noKendKey == null || noKendKey.trim().isEmpty()) {
+            return; // User membatalkan
+        }
+
+        Kendaraan kdr = listParkir.search(noKendKey.trim());
+        
+        if (kdr == null) {
+            JOptionPane.showMessageDialog(this, "Data kendaraan " + noKendKey + " tidak ditemukan.", "Hasil Pencarian", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Kita bisa tampilkan di frame RiwayatParkir, tapi untuk simpel, kita tampilkan di message box
+            long biaya = kdr.getBiayaParkir();
+            String detail = String.format(
+                "Data Ditemukan:\n" +
+                "Nama: %s\n" +
+                "No. Kendaraan: %s\n" +
+                "Jenis: %s\n" +
+                "Status: %s\n" +
+                "Masuk: %s %s\n" +
+                "Pulang: %s %s\n" +
+                "Lama Hari: %d\n" +
+                "Lama Jam: %s\n" +
+                "Total Biaya: %,d",
+                kdr.getPerson().getNama(),
+                kdr.getNoKendaraan(),
+                kdr.getJenisAsString(),
+                kdr.getStatusAsString(),
+                kdr.getWaktuDatang().getDate().toString(), kdr.getWaktuDatang().getTime().toString(),
+                kdr.getWaktuPulang().getDate().toString(), kdr.getWaktuPulang().getTime().toString(),
+                kdr.getLamaHari(),
+                kdr.getLamaJam(),
+                biaya
+            );
+            JOptionPane.showMessageDialog(this, detail, "Hasil Pencarian", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,10 +249,11 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIKKeluar;
     private javax.swing.JButton btnIKMasuk;
     private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnOperasiDelete;
     private javax.swing.JButton btnRiwayatParkir;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -8,16 +8,82 @@ package pelabuhan_project;
  *
  * @author Alesha Naila
  */
+import parking_logic.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 public class RiwayatParkir extends javax.swing.JFrame {
     
+    private KendaraanLinkedList listParkir;
+    private JFrame parentMenu;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RiwayatParkir.class.getName());
+    
+    
+    private void tampilkanDataRiwayat() {
+        // StringBuilder jauh lebih efisien untuk membangun string panjang
+        StringBuilder sb = new StringBuilder();
+        
+        // 1. Buat Header Tabel
+        sb.append("\t\t\t\t\tDaftar Kendaraan Parkir Pelabuhan\n");
+        sb.append("=========================================================================================================================================\n");
+        sb.append(String.format("%-4s %-15s %-12s %-11s %-10s %-12s %-12s %-10s %-10s %-10s %-10s %-12s\n",
+            "No", "Nama Pemilik", "NoKend", "JenisKend", "Status", "TglDatang", "TglPulang", "JamDatang", "JamPulang", "Lama hari", "Lama Jam", "BiayaParkir"));
+        sb.append("-----------------------------------------------------------------------------------------------------------------------------------------\n");
+        
+        long totalBiayaParkir = 0;
 
+        if (listParkir.isEmpty()) {
+            sb.append("|                                    TIDAK ADA DATA                                    |\n");
+        } else {
+            Node current = listParkir.getFirst();
+            int i = 0;
+            while (current != null) {
+                Kendaraan kdr = current.data;
+                long biaya = kdr.getBiayaParkir(); //
+                totalBiayaParkir += biaya;
+                
+                // Ambil format string dari method formatUntukTabel() di Kendaraan.java
+                sb.append(kdr.formatUntukTabel(i, biaya)); // method ini sudah punya \n di akhirnya
+                
+                current = current.next; //
+                i++;
+            }
+        }
+
+        sb.append("=========================================================================================================================================\n");
+        sb.append(String.format("Total Biaya Parkir : %,d\n", totalBiayaParkir));
+        
+        // 6. Set teks ke JTextArea
+        textAreaRiwayat.setText(sb.toString());
+        // Set kursor ke atas
+        textAreaRiwayat.setCaretPosition(0);
+    }
     /**
      * Creates new form RiwayatParkir
      */
-    public RiwayatParkir() {
+    public RiwayatParkir(JFrame parent, KendaraanLinkedList list) {
         initComponents();
+        this.listParkir = list;
+        this.parentMenu = parent;
+        
+        textAreaRiwayat.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
+        
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        
+        tampilkanDataRiwayat();
     }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Cukup panggil method yang sudah kita buat
+    tampilkanDataRiwayat();
+    JOptionPane.showMessageDialog(this, "Data riwayat berhasil diperbarui.", "Refresh Sukses", JOptionPane.INFORMATION_MESSAGE);
+}
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,19 +127,21 @@ public class RiwayatParkir extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(382, 382, 382)
+                        .addComponent(jLabel1)))
+                .addGap(0, 42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(136, 136, 136))
+                    .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(184, 184, 184))
-                    .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(57, 57, 57))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +160,9 @@ public class RiwayatParkir extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,8 +173,7 @@ public class RiwayatParkir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setVisible(true);
+        this.parentMenu.setVisible(true); // Tampilkan lagi MainMenu yang asli
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -113,7 +182,16 @@ public class RiwayatParkir extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -130,7 +208,12 @@ public class RiwayatParkir extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RiwayatParkir().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            // DIPERBAIKI: Untuk testing, kita buat list dummy DAN main menu dummy
+            JFrame dummyFrame = new JFrame("Dummy Parent");
+            KendaraanLinkedList dummyList = new KendaraanLinkedList();
+            new RiwayatParkir(dummyFrame, dummyList).setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
