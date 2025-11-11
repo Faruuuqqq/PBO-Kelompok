@@ -78,6 +78,7 @@ public class KalkulatorFrame extends javax.swing.JFrame {
         sinhButton = new javax.swing.JButton();
         coshButton = new javax.swing.JButton();
         sinButton = new javax.swing.JButton();
+        judulLabel1 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -100,11 +101,11 @@ public class KalkulatorFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         judulLabel.setBackground(new java.awt.Color(255, 255, 255));
-        judulLabel.setFont(new java.awt.Font("JetBrains Mono", 1, 38)); // NOI18N
+        judulLabel.setFont(new java.awt.Font("JetBrains Mono", 1, 14)); // NOI18N
         judulLabel.setForeground(new java.awt.Color(255, 255, 255));
-        judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        judulLabel.setText("KALKULATOR SCIENTIFIC");
-        jPanel1.add(judulLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 500, -1));
+        judulLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        judulLabel.setText("COPYRIGHT ANDIN - ALESHA - ACHMAD");
+        jPanel1.add(judulLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 500, 30));
 
         hasilPanel1.setBackground(new java.awt.Color(0, 0, 0));
         hasilPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51), 6));
@@ -531,6 +532,13 @@ public class KalkulatorFrame extends javax.swing.JFrame {
         });
         jPanel1.add(sinButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 100, 46));
 
+        judulLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        judulLabel1.setFont(new java.awt.Font("JetBrains Mono", 1, 38)); // NOI18N
+        judulLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        judulLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        judulLabel1.setText("KALKULATOR SCIENTIFIC");
+        jPanel1.add(judulLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 500, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -543,7 +551,7 @@ public class KalkulatorFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -879,6 +887,7 @@ public class KalkulatorFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel judulLabel;
+    private javax.swing.JLabel judulLabel1;
     private javax.swing.JButton kaliButton;
     private javax.swing.JButton kurangButton;
     private javax.swing.JButton lnButton;
