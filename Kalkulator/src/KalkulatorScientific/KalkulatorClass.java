@@ -35,7 +35,7 @@ public class KalkulatorClass {
         return expressionDisplay;
     }
 
-    // --- Input Angka dan Desimal ---
+    // Input Angka dan Desimal
     public void inputDigit(String digit) {
         if (startNewNumber) {
             currentDisplay = digit;
@@ -69,15 +69,16 @@ public class KalkulatorClass {
     public void inputConstant(String constant) {
         if (constant.equals("π")) {
             currentDisplay = df.format(Math.PI);
-            expressionDisplay = "π";
+            expressionDisplay = "phi";
             startNewNumber = true;
         }
     }
 
-    // --- Input Fungsi Dasar ---
+    // Input Fungsi Dasar
     public void inputClear() {
         operand1 = 0;
         operator = "";
+        
         currentDisplay = "0";
         expressionDisplay = ""; // Hapus di layar histori juga
         startNewNumber = true;
@@ -92,7 +93,6 @@ public class KalkulatorClass {
             currentDisplay = currentDisplay.substring(0, currentDisplay.length() - 1);
         } else {
             currentDisplay = "0";
-            // Jangan set startNewNumber ke true di sini
         }
     }
 
@@ -107,7 +107,7 @@ public class KalkulatorClass {
         }
     }
 
-    // --- Input Operasi Biner (+, -, *, /, ^) ---
+    // Input Operasi Biner (+, -, *, /, ^)
 
     public void inputOperator(String op) {
         // Jika user ganti operator (misal 12 + lalu menekan *), ganti operatornya
@@ -176,7 +176,7 @@ public class KalkulatorClass {
         startNewNumber = true;
     }
 
-    // --- Input Operasi Uner (sin, cos, 1/x, dll) ---
+    // Input Operasi Uner (sin, cos, 1/x, dll)
 
     public void inputUnaryOperation(String op) {
         double number = Double.parseDouble(currentDisplay);
@@ -210,7 +210,7 @@ public class KalkulatorClass {
                     break;
                 case "√":
                     result = Math.sqrt(number);
-                    expressionText = "√(" + formattedNumber + ")";
+                    expressionText = "sqrt(" + formattedNumber + ")";
                     break;
                 case "x!":
                     result = factorial((int) number); 
@@ -253,7 +253,6 @@ public class KalkulatorClass {
             currentDisplay = "Error";
             expressionDisplay = "Error";
         }
-        
         startNewNumber = true; 
     }
 

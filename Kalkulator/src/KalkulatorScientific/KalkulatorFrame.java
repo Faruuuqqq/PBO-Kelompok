@@ -784,52 +784,52 @@ public class KalkulatorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1KeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-    char key = evt.getKeyChar();
+        char key = evt.getKeyChar();
 
-    // Cek untuk angka 0-9
-    if (key >= '0' && key <= '9') {
-        calculator.inputDigit(String.valueOf(key));
-        updateDisplay();
-    }
+        // Cek untuk angka 0-9
+        if (key >= '0' && key <= '9') {
+            calculator.inputDigit(String.valueOf(key));
+            updateDisplay();
+        }
 
-    // Cek untuk operator
-    switch (key) {
-        case '+':
-            calculator.inputOperator("+");
-            updateDisplay();
-            break;
-        case '-':
-            calculator.inputOperator("-");
-            updateDisplay();
-            break;
-        case '*':
-            calculator.inputOperator("*");
-            updateDisplay();
-            break;
-        case '/':
-            calculator.inputOperator("/");
-            updateDisplay();
-            break;
-        case '.':
-            calculator.inputDecimal();
-            updateDisplay();
-            break;
-    }
+        // Cek untuk operator
+        switch (key) {
+            case '+':
+                calculator.inputOperator("+");
+                updateDisplay();
+                break;
+            case '-':
+                calculator.inputOperator("-");
+                updateDisplay();
+                break;
+            case '*':
+                calculator.inputOperator("*");
+                updateDisplay();
+                break;
+            case '/':
+                calculator.inputOperator("/");
+                updateDisplay();
+                break;
+            case '.':
+                calculator.inputDecimal();
+                updateDisplay();
+                break;
+        }
 
-    // Cek untuk tombol non-karakter
-    int keyCode = evt.getKeyCode();
-    // ini untuk yang =, bisa pake enter
-    if (keyCode == java.awt.event.KeyEvent.VK_ENTER) {
-        calculator.inputEquals();
-        updateDisplay();
-    } else if (keyCode == java.awt.event.KeyEvent.VK_BACK_SPACE) {
-        calculator.inputDelete(); // Tombol Del buat Delete satu per satu karakter
-        updateDisplay();
-        
-    } else if (keyCode == java.awt.event.KeyEvent.VK_ESCAPE) {
-        calculator.inputClear(); // Tombol ESC untuk 'AC'
-        updateDisplay();
-    }
+        // Cek untuk tombol non-karakter
+        int keyCode = evt.getKeyCode();
+        // ini untuk yang =, bisa pake enter
+        if (keyCode == java.awt.event.KeyEvent.VK_ENTER) {
+            calculator.inputEquals();
+            updateDisplay();
+        } else if (keyCode == java.awt.event.KeyEvent.VK_BACK_SPACE) {
+            calculator.inputDelete(); // Tombol Del buat Delete satu per satu karakter
+            updateDisplay();
+            
+        } else if (keyCode == java.awt.event.KeyEvent.VK_ESCAPE) {
+            calculator.inputClear(); // Tombol ESC untuk 'AC'
+            updateDisplay();
+        }
     }//GEN-LAST:event_formKeyPressed
 
     /**
